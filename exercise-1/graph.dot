@@ -1,0 +1,7 @@
+digraph mutex {
+Init -> s0[size=10];
+s0 -> s1; 
+s1 -> s2[label="x==0||y==0"];
+s1 -> s1[label="!(x==0||y==0)"];
+s2 -> s0;
+}
