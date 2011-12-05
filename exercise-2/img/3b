@@ -1,0 +1,7 @@
+digraph ex3a {
+a[label="a{p}"];
+b[label="b{q}"];
+init -> a;
+a -> a;
+a -> b;
+}
