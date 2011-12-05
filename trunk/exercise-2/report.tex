@@ -49,9 +49,35 @@ So the statement $AG \quad EF p $ does \textbf{NOT} hold, since if we start from
 
 \subsection*{c)}
 
-MISS
+We can derivate $E \quad true \quad U (\neg ( E \quad true \quad U \quad p ))$ ($\gamma$) from $AG \quad EF \quad p$ ($\sigma$) (Equation \ref{equa:e1}).
 
-%Recalling from the fix point theory we might say, we can derivate from: $ \upsilon Z . p \land EX Z $.
+\begin{equation}
+AG \quad EF \quad p \Rightarrow \newline
+AG \quad E \quad true \quad U \quad p \Rightarrow \newline
+\neg EF \quad \neg ( E \quad true \quad U \quad p ) \Rightarrow \newline
+E \quad true \quad U (\neg ( E \quad true \quad U \quad p ))
+\label{equa:e1}
+\end{equation}
+ 
+We can solve the equation per block, starting from $\alpha=E\quad true \quad U \quad p$.
+
+$
+E\quad true \quad U \quad p=\mu Z. p \lor (p \land EX Z) \Rightarrow \newline 
+Z_0=\emptyset; \newline
+Z_1=p \lor ( true \land EX Z_0 ) \Rightarrow \{a,c\} \cup (true \cap  Z_0) = \{a,c\} ; \newline
+Z_2=\{a,c\} \cup ( true \cap \{a,b\} = \{a,b,c\} \newline
+Z_3=\{a,c\} \cup ( true \cap  \{a,b,c\} ) = \{a,b,c\} \newline
+$
+
+By applying in the initial formula we have:
+$
+T_0=E \quad true \quad U (\neg ( \alpha )); \newline
+T_1=E \quad true \quad U (\neg ( \{a,b,c\} )); \newline
+T_2=E \quad true \quad U (\emptyset); \newline
+T_3=\emptyset;
+$ 
+
+So the statement does \textbf{NOT} hold in the given Kripke structure.
 
 \section{Question 3}
 
