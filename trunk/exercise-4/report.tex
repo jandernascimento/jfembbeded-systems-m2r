@@ -141,8 +141,149 @@ Dining version 2, passing:
 
 \subsection*{Question 04}
 
+The CTL formula $EX\,AX\,p$ is true for the first Kripke structure, but not
+for the second one; therefore they cannot be bisimilar.
+
 \subsection*{Question 05}
 
+\begin{center}
+\begin{tabular}{ | l | l || l | l | l | l | l | l | }
+  \hline
+      A & B &
+      \multicolumn{2}{c|}{$t_0$} &
+      \multicolumn{2}{c|}{$t_1$} &
+      \multicolumn{2}{c|}{$t_2$} \\
+  \hline
+  \hline
+      \multicolumn{2}{|c||}{$s_0$}
+      & X & & X & X & X & \\
+  \hline
+      \multicolumn{2}{|c||}{$s_1$}
+      & X & X & X & & X & X \\
+  \hline
+\end{tabular}
+\end{center}
+
+We have initialized both $A$ and $B$ to include all pairs for which:
+\[
+(s,s') \in S \times S' \textrm{so that}\quad L(s) = L(s')
+\]
+
+Which is the pairs $\{(s_0,t_1),(s_1,t_0),(s_1,t_2)\}$. While checking $(s_0,t_0)$ we find that these two properties hold:
+
+\[
+\forall (s_0,t) \in T: \exists t' \in S' \quad\textrm{so that}\quad
+  (t_0,t') \in T', (t,t') \in B
+\]
+\[
+\forall (t_0,t') \in T': \exists t \in S \quad\textrm{so that}\quad
+  (s_0,t) \in T, (t,t') \in B\\
+\]
+
+So we mark it as checked in $A$ and leave it as part of $B$. Likewise for
+$(s_0,t_2),(s_1,t_1)$. So in conclusion, the two structures are bisimilar
+because:
+
+\[
+B = \{(s_0,t_0),(s_0,t_2),(s_1,t_1)\}
+\]
+\[
+(s_0,t_0) \in B
+\]
+
+Also, bisimilarity implies they are also simulation equivalent.
+
 \subsection*{Question 06}
+
+\lstset{ %
+basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+%numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it's 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+%backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,			% adds a frame around the code
+captionpos=t,			% sets the caption-position to bottom
+breaklines=true,		% sets automatic line breaking
+breakatwhitespace=false,	% sets if automatic breaks should only happen at whitespace
+frameround={t}{f}{f}{f},
+}
+
+LTL properties for {\em mutual exclusion}:
+
+\begin{lstlisting}
+G(!(ph0.self=EATING * ph1.self=EATING));
+G(!(ph1.self=EATING * ph2.self=EATING));
+G(!(ph2.self=EATING * ph3.self=EATING));
+G(!(ph3.self=EATING * ph0.self=EATING));
+\end{lstlisting}
+
+LTL properties for {\em deadlock}:
+
+\begin{lstlisting}
+!F(G(ph0.self=HUNGRY * ph1.self=HUNGRY * ph2.self=HUNGRY * ph3.self=HUNGRY));
+\end{lstlisting}
+
+LTL properties for {\em starvation}:
+
+\begin{lstlisting}
+!F(G(ph0.self=HUNGRY));
+!F(G(ph1.self=HUNGRY));
+!F(G(ph2.self=HUNGRY));
+!F(G(ph3.self=HUNGRY));
+\end{lstlisting}
+
+Checking with VIS provides the following results for {\em dining-v1.v},
+where we see mutual exclusion is satisfied, however deadlock and starvation are
+possible:
+
+\begin{lstlisting}
+Formula: G(!((ph0.self=EATING * ph1.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph1.self=EATING * ph2.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph2.self=EATING * ph3.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph3.self=EATING * ph0.self=EATING)))
+# LTL_MC: formula passed
+Formula: !(F(G((((ph0.self=HUNGRY * ph1.self=HUNGRY) * ph2.self=HUNGRY) * ph3.self=HUNGRY))))
+# LTL_MC: formula failed
+Formula: !(F(G(ph0.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph1.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph2.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph3.self=HUNGRY)))
+# LTL_MC: formula failed
+\end{lstlisting}
+
+However for the {\em dining-v2.v} implementation, we see that deadlock is not
+possible. However starvation is still a problem:
+
+\begin{lstlisting}
+Formula: G(!((ph0.self=EATING * ph1.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph1.self=EATING * ph2.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph2.self=EATING * ph3.self=EATING)))
+# LTL_MC: formula passed
+Formula: G(!((ph3.self=EATING * ph0.self=EATING)))
+# LTL_MC: formula passed
+Formula: !(F(G((((ph0.self=HUNGRY * ph1.self=HUNGRY) * ph2.self=HUNGRY) * ph3.self=HUNGRY))))
+# LTL_MC: formula passed
+Formula: !(F(G(ph0.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph1.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph2.self=HUNGRY)))
+# LTL_MC: formula failed
+Formula: !(F(G(ph3.self=HUNGRY)))
+# LTL_MC: formula failed
+\end{lstlisting}
+
 
 \end{document}
