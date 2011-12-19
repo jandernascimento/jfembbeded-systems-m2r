@@ -113,12 +113,28 @@ For \emph{starvation}:
 !EF(EG(ph3.self=HUNGRY));
 \end{lstlisting}
 
-Propositions for fairness:
+Propositions to add fairness:
 \begin{lstlisting}
 !(ph0.self=EATING);
 !(ph1.self=EATING);
 !(ph2.self=EATING);
 !(ph3.self=EATING);
+\end{lstlisting}
+
+Dining version 2:
+\begin{lstlisting}
+# MC: formula passed --- AG(!((ph0.self=EATING * ph1.self=EATING)))
+# MC: formula passed --- AG(!((ph1.self=EATING * ph2.self=EATING)))
+# MC: formula passed --- AG(!((ph2.self=EATING * ph3.self=EATING)))
+# MC: formula passed --- AG(!((ph3.self=EATING * ph0.self=EATING)))
+# MC: formula passed --- !(EF(AG(ph0.self=HUNGRY)))
+# MC: formula passed --- !(EF(AG(ph1.self=HUNGRY)))
+# MC: formula passed --- !(EF(AG(ph2.self=HUNGRY)))
+# MC: formula passed --- !(EF(AG(ph3.self=HUNGRY)))
+# MC: formula passed --- !(EF(EG(ph0.self=HUNGRY)))
+# MC: formula passed --- !(EF(EG(ph1.self=HUNGRY)))
+# MC: formula passed --- !(EF(EG(ph2.self=HUNGRY)))
+# MC: formula passed --- !(EF(EG(ph3.self=HUNGRY)))
 \end{lstlisting}
 
 \section*{Bisimulation, Simulation}
