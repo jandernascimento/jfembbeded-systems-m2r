@@ -21,20 +21,20 @@
 \subsection*{Question 01}
 
 $
-S_f=\nu Z.EX \land_{c E C}(E Z U (Z \land C)) \newline
-\rightarrow \nu Z.EX((E Z U ( Z \land c_1)) \land (E Z U (Z \land c_2))) \newline
+S_f=\nu Z.EX \land_{c E C}(E Z \cup (Z \land C)) \newline
+\rightarrow \nu Z.EX((E Z \cup ( Z \land c_1)) \land (E Z \cup (Z \land c_2))) \newline
 \newline
 Z_0=S \newline
-Z_1=EX((E Z_0 U (Z_0 \land c_1) \land (E Z_0  U (Z_0 \land c_2)) \newline
+Z_1=EX((E Z_0 \cup (Z_0 \land c_1) \land (E Z_0  \cup (Z_0 \land c_2)) \newline
 \rightarrow EX((EF \{7\}) \land (EF\{4,9\}))
 \rightarrow EX(\{1-7\} \land \{1-5,8-9\})
 \rightarrow EX(\{1-5\})=\{2-5\}
 \newline
-Z_2=EX((E Z_1 U (Z_1 \land c_1) \land (E Z_1  U (Z_0 \land c_2)) \newline
-\rightarrow EX((E Z_1 U (Z_1 \land c_1) \land (E Z_1 U (Z_1 \land C_2))) \newline
-\rightarrow EX((E\{2-5\} U \emptyset) \land (E \{2-5\} U \{4\})) \newline
-\rightarrow EX(\emptyset \land (E \{2-5\} U \{4\})) = \emptyset
-Z_3=EX((E \emptyset U \emptyset) \land (E \emptyset U \emptyset))=\emptyset
+Z_2=EX((E Z_1 \cup (Z_1 \land c_1) \land (E Z_1  \cup (Z_0 \land c_2)) \newline
+\rightarrow EX((E Z_1 \cup (Z_1 \land c_1) \land (E Z_1 \cup (Z_1 \land C_2))) \newline
+\rightarrow EX((E\{2-5\} \cup \emptyset) \land (E \{2-5\} \cup \{4\})) \newline
+\rightarrow EX(\emptyset \land (E \{2-5\} \cup \{4\})) = \emptyset \newline
+Z_3=EX((E \emptyset \cup \emptyset) \land (E \emptyset \cup \emptyset))=\emptyset
 $
 
 As the development do not converge we assume that there are no fair paths in the \emph{Kripke} structure.
@@ -42,11 +42,11 @@ As the development do not converge we assume that there are no fair paths in the
 \subsection*{Question 02}
 
 $
-S_f=\nu Z. EX (EZ U (Z \land \{b,c\} \newline
+S_f=\nu Z. EX (EZ \cup (Z \land \{b,c\} \newline
 Z_0=S \newline
-Z_1=EX (EZ.U(Z_0 \land \{b,c\})) \newline
-\rightarrow EX (E\,S\,U \{b,c\}) \newline
-\rightarrow EX (E\,S\,U \{b,c\} = EF \{b,c\}=S)  \newline
+Z_1=EX (EZ.\cup(Z_0 \land \{b,c\})) \newline
+\rightarrow EX (E\,S\,\cup \{b,c\}) \newline
+\rightarrow EX (E\,S\,\cup \{b,c\} = EF \{b,c\}=S)  \newline
 \newline
 Z\,EX(S)=S \newline
 S_f=S \newline
@@ -69,7 +69,7 @@ So, $A_{c_1}Gp={a,b}$
 
 $
 K,a \models A_{c_1}F\{a,b\}=\neg E_{c_1}G \neg \{a,b\} = \neg E_{c_1}G \{c\}
-\rightarrow E_{b,c}G\{c\}=\nu Z.\{c\} \land EX (E \, Z \, U (Z \land \{b,c\}))
+\rightarrow E_{b,c}G\{c\}=\nu Z.\{c\} \land EX (E \, Z \, \cup (Z \land \{b,c\}))
 \newline
 Z_0=S
 Z_1=\{c\} \land EX (E \, Z_0 \cup Z_0 \land \{b,c\}))
