@@ -37,7 +37,7 @@ Z_2=EX((E Z_1 \cup (Z_1 \land c_1) \land (E Z_1  \cup (Z_0 \land c_2)) \newline
 Z_3=EX((E \emptyset \cup \emptyset) \land (E \emptyset \cup \emptyset))=\emptyset
 $
 
-As the development do not converge we assume that there are no fair paths in the \emph{Kripke} structure.
+So, in the given structure is \textbf{not} possible to find a fair path that obeys $c_1$ and $c_2$ contraints.
 
 \subsection*{Question 02}
 
@@ -286,5 +286,32 @@ Formula: !(F(G(ph3.self=HUNGRY)))
 # LTL_MC: formula failed
 \end{lstlisting}
 
+An LTL property that is true for all paths that none of the philosophers will be eating forever:
+
+\begin{lstlisting}
+!F(G(ph0.self=EATING) + G(ph1.self=EATING) + G(ph2.self=EATING) + G(ph3.self=EATING));
+\end{lstlisting}
+
+We can use that property to construct a new one which checks for starvation.
+
+\begin{lstlisting}
+!F(G(ph0.self=EATING) + G(ph1.self=EATING) + G(ph2.self=EATING) + G(ph3.self=EATING)) -> !F(G(ph0.self=HUNGRY));
+!F(G(ph0.self=EATING) + G(ph1.self=EATING) + G(ph2.self=EATING) + G(ph3.self=EATING)) -> !F(G(ph1.self=HUNGRY));
+!F(G(ph0.self=EATING) + G(ph1.self=EATING) + G(ph2.self=EATING) + G(ph3.self=EATING)) -> !F(G(ph2.self=HUNGRY));
+!F(G(ph0.self=EATING) + G(ph1.self=EATING) + G(ph2.self=EATING) + G(ph3.self=EATING)) -> !F(G(ph3.self=HUNGRY));
+\end{lstlisting}
+
+Using that property on vis shows that the implementation {\em dining-v2.v} is starvation free:
+
+\begin{lstlisting}
+Formula: (!(F((((G(ph0.self=EATING) + G(ph1.self=EATING)) + G(ph2.self=EATING)) + G(ph3.self=EATING)))) -> !(F(G(ph0.self=HUNGRY))))
+# LTL_MC: formula passed
+Formula: (!(F((((G(ph0.self=EATING) + G(ph1.self=EATING)) + G(ph2.self=EATING)) + G(ph3.self=EATING)))) -> !(F(G(ph1.self=HUNGRY))))
+# LTL_MC: formula passed
+Formula: (!(F((((G(ph0.self=EATING) + G(ph1.self=EATING)) + G(ph2.self=EATING)) + G(ph3.self=EATING)))) -> !(F(G(ph2.self=HUNGRY))))
+# LTL_MC: formula passed
+Formula: (!(F((((G(ph0.self=EATING) + G(ph1.self=EATING)) + G(ph2.self=EATING)) + G(ph3.self=EATING)))) -> !(F(G(ph3.self=HUNGRY))))
+# LTL_MC: formula passed
+\end{lstlisting}
 
 \end{document}
