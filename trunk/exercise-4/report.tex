@@ -12,7 +12,7 @@
 
 \title{Embbeded Systems - Exercise 04}
 
-\author{Antonios \and Jander Nascimento}
+\author{Antonios Motakis \and Jander Nascimento}
 
 \maketitle
 
@@ -21,13 +21,13 @@
 \subsection*{Question 01}
 
 $
-S_f=\nu Z.EX \land_{c E C}(E Z \cup (Z \land C)) \newline
-\rightarrow \nu Z.EX((E Z \cup ( Z \land c_1)) \land (E Z \cup (Z \land c_2))) \newline
+S_f=\nu Z.EX \land_{c \in C}(E Z \cup (Z \land C)) \newline
+\quad = \nu Z.EX((E Z \cup ( Z \land c_1)) \land (E Z \cup (Z \land c_2))) \newline
 \newline
 Z_0=S \newline
 Z_1=EX((E Z_0 \cup (Z_0 \land c_1) \land (E Z_0  \cup (Z_0 \land c_2)) \newline
-\rightarrow EX((EF \{7\}) \land (EF\{4,9\}))
-\rightarrow EX(\{1-7\} \land \{1-5,8-9\})
+\rightarrow EX((EF \{7\}) \land (EF\{4,9\})) \newline
+\rightarrow EX(\{1-7\} \land \{1-5,8-9\}) \newline
 \rightarrow EX(\{1-5\})=\{2-5\}
 \newline
 Z_2=EX((E Z_1 \cup (Z_1 \land c_1) \land (E Z_1  \cup (Z_0 \land c_2)) \newline
@@ -42,14 +42,15 @@ As the development do not converge we assume that there are no fair paths in the
 \subsection*{Question 02}
 
 $
-S_f=\nu Z. EX (EZ \cup (Z \land \{b,c\} \newline
+S_F=\nu Z. EX (EZ \cup (Z \land \{b,c\} \newline
 Z_0=S \newline
-Z_1=EX (EZ.\cup(Z_0 \land \{b,c\})) \newline
+Z_1=EX (EZ_0.\cup(Z_0 \land \{b,c\})) \newline
 \rightarrow EX (E\,S\,\cup \{b,c\}) \newline
 \rightarrow EX (E\,S\,\cup \{b,c\} = EF \{b,c\}=S)  \newline
+\rightarrow EX (E\,true\,\cup \{b,c\}) = EF \{b,c\}=S  \newline
 \newline
 Z\,EX(S)=S \newline
-S_f=S \newline
+S_F=S \newline
 $
 
 $
@@ -68,20 +69,20 @@ $
 So, $A_{c_1}Gp={a,b}$
 
 $
-K,a \models A_{c_1}F\{a,b\}=\neg E_{c_1}G \neg \{a,b\} = \neg E_{c_1}G \{c\}
+K,a \models A_{c_1}F\{a,b\}=\neg E_{c_1}G \neg \{a,b\} = \neg E_{c_1}G \{c\} \newline
 \rightarrow E_{b,c}G\{c\}=\nu Z.\{c\} \land EX (E \, Z \, \cup (Z \land \{b,c\}))
 \newline
-Z_0=S
-Z_1=\{c\} \land EX (E \, Z_0 \cup Z_0 \land \{b,c\}))
-\rightarrow \{c\} \land EX (E \, S \cup \{b,c\})=\{c\} \land \{EX\,EF\{b,c\}
-\rightarrow \{c\} \land EX S = \{c\}
-Z_2=\{c\} \land EX(E\,Z_1 \cup (Z_1 \land \{b,c\}))
-\rightarrow \{c\} \land EX(E\,\{c\} \cup \{c\})=\{c\}=Z_1 
+Z_0=S \newline
+Z_1=\{c\} \land EX (E \, Z_0 \cup Z_0 \land \{b,c\})) \newline
+\rightarrow \{c\} \land EX (E \, S \cup \{b,c\})=\{c\} \land \{EX\,EF\{b,c\} \newline
+\rightarrow \{c\} \land EX S = \{c\} \newline
+Z_2=\{c\} \land EX(E\,Z_1 \cup (Z_1 \land \{b,c\})) \newline
+\rightarrow \{c\} \land EX(E\,\{c\} \cup \{c\})=\{c\}=Z_1  
 $
 
 $
 \neg E_{b,c}G\{c\}=\{a,b\} \Rightarrow [[A_c\,F\,AG\,p]]_k=\{a,b\}
-K,a \models AF\,AG\,p
+K,a \models AF\,AG\,p \newline
 c_1=\{b,c\}
 $
 
@@ -121,7 +122,7 @@ Propositions to add fairness:
 !(ph3.self=EATING);
 \end{lstlisting}
 
-Dining version 2, passing:
+Dining version 2 with fairness, output:
 \begin{lstlisting}
 # MC: formula passed --- AG(!((ph0.self=EATING * ph1.self=EATING)))
 # MC: formula passed --- AG(!((ph1.self=EATING * ph2.self=EATING)))
