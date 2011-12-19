@@ -87,6 +87,40 @@ $
 
 \subsection*{Question 03}
 
+Propositions without fairness:
+
+For \emph{mutual exclusion}:
+\begin{lstlisting}
+AG(!(ph0.self=EATING * ph1.self=EATING));
+AG(!(ph1.self=EATING * ph2.self=EATING));
+AG(!(ph2.self=EATING * ph3.self=EATING));
+AG(!(ph3.self=EATING * ph0.self=EATING));
+\end{lstlisting}
+
+For \emph{progressdeadlock}:
+\begin{lstlisting}
+!EF(AG(ph0.self=HUNGRY));
+!EF(AG(ph1.self=HUNGRY));
+!EF(AG(ph2.self=HUNGRY));
+!EF(AG(ph3.self=HUNGRY));
+\end{lstlisting}
+
+For \emph{starvation}:
+\begin{lstlisting}
+!EF(EG(ph0.self=HUNGRY));
+!EF(EG(ph1.self=HUNGRY));
+!EF(EG(ph2.self=HUNGRY));
+!EF(EG(ph3.self=HUNGRY));
+\end{lstlisting}
+
+Propositions for fairness:
+\begin{lstlisting}
+!(ph0.self=EATING);
+!(ph1.self=EATING);
+!(ph2.self=EATING);
+!(ph3.self=EATING);
+\end{lstlisting}
+
 \section*{Bisimulation, Simulation}
 
 \subsection*{Question 04}
