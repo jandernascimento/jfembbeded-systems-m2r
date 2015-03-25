@@ -1,0 +1,1 @@
+Word related to embbeded systems courses
